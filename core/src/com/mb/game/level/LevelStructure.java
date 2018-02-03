@@ -1,7 +1,6 @@
 package com.mb.game.level;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * Created by Markus on 03.02.2018.
@@ -33,9 +32,7 @@ public class LevelStructure {
     }
 
     public void addTile(int x, int y, int spriteIndex) {
-        if(mPixmap == null) {
-            mPixmap = new Pixmap(mTileSize * mWidth, mTileSize * mHeight, Pixmap.Format.RGBA8888);
-        }
+        ensurePixmapExists();
 
         int tilesPerRow = mSpriteSheet.getWidth() / mTileSize;
         int atlasStartX = (spriteIndex % tilesPerRow) * mTileSize;
@@ -47,9 +44,14 @@ public class LevelStructure {
         for(int pixelX = 0; pixelX < mTileSize; pixelX++) {
             for(int pixelY = 0; pixelY < mTileSize; pixelY++) {
                 int pixelColor = mSpriteSheet.getPixel(atlasStartX + pixelX, atlasStartY + pixelY);
-
                 mPixmap.drawPixel(resultStartX + pixelX, resultStartY + pixelY, pixelColor);
             }
+        }
+    }
+
+    private void ensurePixmapExists() {
+        if(mPixmap == null) {
+            mPixmap = new Pixmap(mTileSize * mWidth, mTileSize * mHeight, Pixmap.Format.RGBA8888);
         }
     }
 
