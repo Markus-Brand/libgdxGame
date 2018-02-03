@@ -20,6 +20,11 @@ public class LevelReader {
     private static Level parseLevel(Element levelTag) {
         Level level = new Level();
 
+        Element metaTag = levelTag.getChildByName("meta");
+        String levelName = metaTag.getChildByName("name").getText();
+
+        level.setName(levelName);
+
         level.setLevelStructure(parseLevelStructure(levelTag.getChildByName("structure")));
 
         return level;

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Level {
 
     private LevelStructure mLevelStructure;
+    private String mName;
 
     public LevelStructure getLevelStructure() {
         return mLevelStructure;
@@ -23,5 +24,13 @@ public class Level {
 
     public void dispose() {
         mLevelStructure.dispose();
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public String getName() {
+        return mName;
     }
 }
