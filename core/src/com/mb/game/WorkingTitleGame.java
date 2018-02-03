@@ -8,32 +8,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mb.game.level.Level;
+import com.mb.game.level.LevelReader;
 
 import java.nio.IntBuffer;
 
 public class WorkingTitleGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+
 	Viewport viewport;
 	Camera camera;
+
+	Level mLevel;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		Texture stone = new Texture("stone.png");
-		stone.getTextureData().prepare();
-		Pixmap map = stone.getTextureData().consumePixmap();
-		int levelSize = 32;
-        Pixmap level = new Pixmap(levelSize * 32, levelSize * 32, Pixmap.Format.RGBA8888);
-        stone.getTextureData().prepare();
-		for(int i = 0; i < levelSize;  i++) {
-		    for(int o = 0; o < levelSize; o++) {
-		        if(((map.getPixel(i, o) & 0xFF000000) >> 24) > 78) {
-                    level.drawPixmap(map, i * 32, o * 32);
-                }
-            }
-        }
-        img = new Texture(level);
+
+		mLevel = LevelReader.readLevel("level1");
 
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(1600, 900, camera);
@@ -50,14 +42,14 @@ public class WorkingTitleGame extends ApplicationAdapter {
 
         batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(img, 350, 0, 900, 900);
+		mLevel.render(batch);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		mLevel.dispose();
 	}
 
     @Override
