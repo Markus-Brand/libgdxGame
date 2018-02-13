@@ -1,12 +1,29 @@
 package com.mb.game.level;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * Created by Markus on 03.02.2018.
+ * TODO: Add class comment
+ * @author Markus
  */
 public class LevelStructure {
+    private static BodyDef bodyDef;
 
+    private static PolygonShape groundBox;
+
+    static {
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyType.StaticBody;
+        groundBox = new PolygonShape();
+        groundBox.setAsBox(0.5f, 0.5f);
+    }
+
+    private final World mWorld;
     private Texture mTexture;
     private Pixmap mPixmap;
 
@@ -14,6 +31,10 @@ public class LevelStructure {
     private int mTileSize;
     private int mWidth;
     private int mHeight;
+
+    public LevelStructure(World world) {
+        mWorld = world;
+    }
 
     public void setSpriteSheet(Pixmap spriteSheet) {
         mSpriteSheet = spriteSheet;
@@ -39,7 +60,7 @@ public class LevelStructure {
         int atlasStartY = (spriteIndex / tilesPerRow) * mTileSize;
 
         int resultStartX = x * mTileSize;
-        int resultStartY = y * mTileSize;
+        int resultStartY = (mHeight - y - 1) * mTileSize;
 
         for(int pixelX = 0; pixelX < mTileSize; pixelX++) {
             for(int pixelY = 0; pixelY < mTileSize; pixelY++) {
@@ -47,6 +68,15 @@ public class LevelStructure {
                 mPixmap.drawPixel(resultStartX + pixelX, resultStartY + pixelY, pixelColor);
             }
         }
+
+        addStaticBodyToWorld(x, y);
+    }
+
+    private void addStaticBodyToWorld(int startX, int startY) {
+        bodyDef.position.set(startX + 0.5f, startY  + 0.5f);
+
+        Body body = mWorld.createBody(bodyDef);
+        body.createFixture(groundBox, 0.0f);
     }
 
     private void ensurePixmapExists() {

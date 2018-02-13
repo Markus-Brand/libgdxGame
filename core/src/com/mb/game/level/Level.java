@@ -1,14 +1,17 @@
 package com.mb.game.level;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * Created by Markus on 03.02.2018.
+ * TODO: Add class comment
+ * @author Markus
  */
 public class Level {
 
     private LevelStructure mLevelStructure;
     private String mName;
+    private World mWorld;
 
     public LevelStructure getLevelStructure() {
         return mLevelStructure;
@@ -32,5 +35,9 @@ public class Level {
 
     public String getName() {
         return mName;
+    }
+
+    public void setWorld(World world) {
+        mWorld = world;
     }
 }

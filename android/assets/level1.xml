@@ -6,13 +6,58 @@
     <structure spriteSheet="wall.png" tileSize="16" width="16" height="16">
         <tile>
             <x>0</x>
+            <y>5</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>1</x>
+            <y>4</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>2</x>
+            <y>3</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>3</x>
+            <y>2</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>4</x>
+            <y>1</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>5</x>
             <y>0</y>
             <spriteIndex>0</spriteIndex>
         </tile>
         <tile>
+            <x>6</x>
+            <y>1</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>7</x>
+            <y>2</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>8</x>
+            <y>3</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
+            <x>9</x>
+            <y>4</y>
+            <spriteIndex>0</spriteIndex>
+        </tile>
+        <tile>
             <x>10</x>
-            <y>10</y>
-            <spriteIndex>4</spriteIndex>
+            <y>5</y>
+            <spriteIndex>0</spriteIndex>
         </tile>
     </structure>
 </level>
